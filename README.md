@@ -22,3 +22,10 @@ code --install-extension ivan-bocharov.stan-vscode
 ```
 
 or find and install it from the Extensions view.
+
+Locally:
+
+```
+vsce package
+code --install-extension ./stan-vscode-0.3.0.vsix # change version as necessary
+```

@@ -85,6 +85,7 @@ export async function buildFormatCommand(file: string, name: string): Promise<st
     --auto-format "${file}"
     --max-line-length=${linelen}
     --filename-in-msg "${name}"
+    --canonicalize=deprecations
     --allow-undefined
     `
         .trim()
