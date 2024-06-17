@@ -26,6 +26,7 @@ or find and install it from the Extensions view.
 Locally:
 
 ```
-vsce package
-code --install-extension ./stan-vscode-0.3.0.vsix # change version as necessary
+npm i
+npm run build
+code --install-extension ./stan-vscode-0.4.0.vsix # change version as necessary
 ```
