@@ -3,8 +3,8 @@
   "displayName": "stan-vscode",
   "description": "Stan language support for VS Code",
   "version": "0.4.0",
-  "publisher": "ivan-bocharov",
-  "repository": "https://github.com/bocharov-ivan/stan-vscode",
+  "publisher": "wardbrian",
+  "repository": "https://github.com/wardbrian/stan-vscode",
   "icon": "img/stan_logo.png",
   "engines": {
     "vscode": "^1.76.0"
@@ -64,9 +64,6 @@
   "scripts": {
     "compile": "npm run check-types && node esbuild.js",
     "check-types": "tsc --noEmit",
-    "watch": "npm-run-all -p watch:*",
-    "watch:esbuild": "node esbuild.js --watch",
-    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "vscode:prepublish": "npm run package",
     "package": "npm run check-types && node esbuild.js --production",
     "build": "vsce package"

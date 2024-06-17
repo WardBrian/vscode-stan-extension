@@ -2,7 +2,7 @@
 
 This package adds syntax highlighting, code folding and snippets for [Stan](https://mc-stan.org) files in [Visual Studio Code](https://code.visualstudio.com/).
 
-The grammar was originally converted from the [atom-language-stan](https://github.com/jrnold/atom-language-stan) Stan package. The grammar has since been updated to support Stan v2.26.
+The grammar was originally converted from the [atom-language-stan](https://github.com/jrnold/atom-language-stan) Stan package. The grammar has since been updated to support Stan v2.35.
 
 ## Features
 
@@ -14,6 +14,10 @@ The grammar was originally converted from the [atom-language-stan](https://githu
 
 ### Code Folding
 ![code-folding](img/code-folding.gif)
+
+### Formatting on save
+
+![formatting](img/formatting.gif)
 
 ## Installation
 
