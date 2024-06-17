@@ -1,4 +1,7 @@
-# stan-vscode README
+# stan-vscode
+
+This is a fork of the original [stan-vscode by ivan-bocharov](https://github.com/ivan-bocharov/stan-vscode).
+It features more up-to-date syntax highlighting and auto-formatting for Stan files.
 
 This package adds syntax highlighting, code folding and snippets for [Stan](https://mc-stan.org) files in [Visual Studio Code](https://code.visualstudio.com/).
 
@@ -7,12 +10,15 @@ The grammar was originally converted from the [atom-language-stan](https://githu
 ## Features
 
 ### Syntax highlighting
+
 ![Syntax highlighting example](img/highlight-example.png)
 
 ### Snippets
+
 ![snippets](img/snippets.gif)
 
 ### Code Folding
+
 ![code-folding](img/code-folding.gif)
 
 ### Formatting on save
