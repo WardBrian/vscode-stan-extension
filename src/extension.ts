@@ -7,14 +7,14 @@ export let registration: vscode.Disposable | undefined;
 let logger = vscode.window.createOutputChannel("Stan Formatting")
 
 
-type StancFunction = (filename: string, code: string, options: string[]) => { errors?: string[], result?: string };
+type StancFunction = (filename: string, code: string, options: string[]) => { errors: undefined, result: string } | { errors: string[], result: undefined };
 
-import stancjs = require("./stanc.js");
-const stanc: StancFunction = stancjs;
+const stancjs = require("./stanc.js");
+const stanc: StancFunction = stancjs.stanc;
 logger.appendLine("Loaded stanc.js")
 
 
-function callStan(filename: string, code: string): { errors?: string[], result: string } | { errors?: string[], result?: string } {
+function callStan(filename: string, code: string): { errors: undefined, result: string } | { errors: string[], result: undefined } {
     const lineLength = vscode.workspace.getConfiguration("stan-vscode.format").get<number>("lineLength") ?? 78;
     const args = [
         "auto-format",
@@ -23,17 +23,12 @@ function callStan(filename: string, code: string): { errors?: string[], result: 
         "canonicalze=deprecations",
         "allow-undefined",
     ]
+    logger.appendLine(`Running stanc on ${filename} with args: ${args.join(", ")}`)
     return stanc(filename, code, args);
 }
 
 
-/**
- * Handle an error raised by `promiseExec`, which passes an exception object.
- *
- * @param err The error raised by `promiseExec`, which would have been run to
- * execute the format command.
- */
-export async function alertFormattingError(
+async function alertFormattingError(
     errors: string[]
 ): Promise<void> {
 
@@ -48,8 +43,6 @@ export async function alertFormattingError(
         );
         if (response === outputButton) {
             logger.show(true);
-            logger.clear();
-            logger.appendLine(message);
         }
     } else {
         const bugReportButton = "Submit Bug Report";
@@ -71,14 +64,11 @@ export async function alertFormattingError(
 /**
  * Format a file using Docformatter and return the edit hunks without
  * modifying the file.
- * @param path Full path to a file to format.
  * @returns A promise that resolves to the edit hunks, which can then be
  * converted to edits and applied to the file. If the promise rejects, will
  * automatically show an error message to the user.
  */
-export async function formatFile(document: vscode.TextDocument): Promise<Hunk[]> {
-
-
+async function formatFile(document: vscode.TextDocument): Promise<Hunk[]> {
     const code = document.getText();
     const fileName = document.fileName;
     const { errors, result } = callStan(fileName, code);
@@ -86,9 +76,6 @@ export async function formatFile(document: vscode.TextDocument): Promise<Hunk[]>
     if (errors) {
         alertFormattingError(errors);
         throw new Error("Formatting failed: " + errors.join("\n"));
-    }
-    if (!result) {
-        throw new Error("Formatting failed: no result returned");
     }
     const patch = createPatch(fileName, code, result);
     const parsed: ParsedDiff[] = parsePatch(patch);
@@ -101,7 +88,7 @@ export async function formatFile(document: vscode.TextDocument): Promise<Hunk[]>
  * @param hunks Array of hunks to convert to edits.
  * @returns Array of VSCode text edits, which map directly to the input hunks.
  */
-export function hunksToEdits(hunks: Hunk[]): vscode.TextEdit[] {
+function hunksToEdits(hunks: Hunk[]): vscode.TextEdit[] {
     return hunks.map((hunk): vscode.TextEdit => {
         const startPos = new vscode.Position(hunk.oldStart - 1, 0)
         const endPos = new vscode.Position(hunk.oldStart - 1 + hunk.oldLines, 0)
@@ -134,9 +121,6 @@ export function activate(): void {
         provideDocumentFormattingEdits: (
             document: vscode.TextDocument
         ): Promise<vscode.TextEdit[]> => {
-            if (!vscode.workspace.getConfiguration("stan-vscode.format").get<boolean>("enable")) {
-                return Promise.resolve([]);
-            }
             return formatFile(document).then(hunksToEdits);
         }
     };
@@ -156,11 +140,4 @@ export function deactivate(): void {
     if (registration) {
         registration.dispose();
     }
-}
-
-/**
- * Exception thrown when formatting fails.
- */
-export interface FormatException {
-    message: string;
 }

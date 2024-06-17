@@ -1,8 +1,10 @@
 # Change Log
 
-# 0.3.0
+# 0.5.0
 
-- Added a Formatter. This requires you to set the path to stanc in settings
+- Forked from ivan-bocharov/stan-vscode
+- Added support for Stan 2.35's syntax and functions
+- Added automatic formatting for Stan code via stanc.js
 
 # 0.2.2
 - Snippets

@@ -11,19 +11,19 @@ The grammar was originally converted from the [atom-language-stan](https://githu
 
 ### Syntax highlighting
 
-![Syntax highlighting example](img/highlight-example.png)
+![Syntax highlighting example](./img/highlight-example.png)
 
 ### Snippets
 
-![snippets](img/snippets.gif)
+![snippets](./img/snippets.gif)
 
 ### Code Folding
 
-![code-folding](img/code-folding.gif)
+![code-folding](./img/code-folding.gif)
 
 ### Formatting on save
 
-![formatting](img/formatting.gif)
+![formatting](./img/formatting.gif)
 
 ## Installation
 

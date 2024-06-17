@@ -2,6 +2,7 @@
 node_modules
 out/
 src/
+img/*.gif
 tsconfig.json
 webpack.config.js
 esbuild.js
