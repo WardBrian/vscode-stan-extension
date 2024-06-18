@@ -1,4 +1,4 @@
-# vscode-stan-extension
+# [vscode-stan-extension](https://marketplace.visualstudio.com/items?itemName=wardbrian.vscode-stan-extension)
 
 This is a fork of the original [stan-vscode by ivan-bocharov](https://github.com/ivan-bocharov/stan-vscode).
 It features more up-to-date syntax highlighting and auto-formatting for Stan files.
