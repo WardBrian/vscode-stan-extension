@@ -82,5 +82,13 @@ function provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.T
     return hunksToEdits(parsed[0].hunks);
 }
 
+function registerFormatter(context: vscode.ExtensionContext) {
+    context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(
+        { scheme: "file", language: "stan" },
+        { provideDocumentFormattingEdits }
+    ));
+    logger.appendLine("Initialized Stan formatting")
+}
 
-export default provideDocumentFormattingEdits;
+
+export default registerFormatter;

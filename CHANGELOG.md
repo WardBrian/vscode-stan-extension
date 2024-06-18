@@ -5,6 +5,7 @@
 - Forked from ivan-bocharov/stan-vscode
 - Added support for Stan 2.35's syntax and functions
 - Added automatic formatting for Stan code via stanc.js
+- Added warning and error diagnostics for Stan code via stanc.js
 
 # 0.2.2
 - Snippets

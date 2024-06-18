@@ -15,6 +15,7 @@ parameters {
   real<lower=0> tau;
   real<offset=0, multiplier=1> affine;
   array[J] real theta;
+  real jacobian;
 }
 model {
   mu ~ normal(0, 5);
