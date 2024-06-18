@@ -23,7 +23,7 @@ async function alertFormattingError(
     } else if (message.includes("Syntax") || message.includes("Semantic")) {
         const outputButton = "Show Output";
         const response = await vscode.window.showErrorMessage(
-            errorWindowMessage +" in your program",
+            errorWindowMessage + " in your program",
             outputButton
         );
         if (response === outputButton) {
@@ -39,7 +39,7 @@ async function alertFormattingError(
             vscode.commands.executeCommand(
                 "vscode.open",
                 vscode.Uri.parse(
-                    "https://github.com/wardbrian/stan-vscode/issues/new"
+                    "https://github.com/wardbrian/vscode-stan-extension/issues/new"
                 )
             );
         }
@@ -76,7 +76,7 @@ function hunksToEdits(hunks: Hunk[]): vscode.TextEdit[] {
  * converted to edits and applied to the file. If the promise rejects, will
  * automatically show an error message to the user.
  */
-function provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
+function doFormat(document: vscode.TextDocument): vscode.TextEdit[] {
     const code = document.getText();
     const fileName = document.fileName;
     const { errors, result } = callStan(fileName, code);
@@ -92,8 +92,8 @@ function provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.T
 
 function registerFormatter(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(
-        { scheme: "file", language: "stan" },
-        { provideDocumentFormattingEdits }
+        "stan",
+        { provideDocumentFormattingEdits: doFormat }
     ));
     logger.appendLine("Initialized Stan formatting")
 }

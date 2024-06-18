@@ -13,7 +13,7 @@ logger.appendLine("Loaded stanc.js")
 
 
 function callStan(filename: string, code: string): StancReturn {
-    const lineLength = vscode.workspace.getConfiguration("stan-vscode.format").get<number>("lineLength") ?? 78;
+    const lineLength = vscode.workspace.getConfiguration("vscode-stan-extension.format").get<number>("lineLength") ?? 78;
     const args = [
         "auto-format",
         `filename-in-msg=${filename}`,

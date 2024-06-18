@@ -1,4 +1,6 @@
 const esbuild = require('esbuild');
+const polyfillGlobals = require('@esbuild-plugins/node-globals-polyfill');
+const polyfillModules = require('@esbuild-plugins/node-modules-polyfill');
 
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');
@@ -11,13 +13,22 @@ async function main() {
     minify: production,
     sourcemap: !production,
     sourcesContent: false,
-    platform: 'node',
-    outfile: 'dist/extension.js',
+    platform: 'browser',
+    outdir: 'dist',
     external: ['vscode'],
     logLevel: 'silent',
+    // Node.js global to browser globalThis
+    define: {
+      global: 'globalThis'
+    },
+
     plugins: [
-      /* add to the end of plugins array */
-      esbuildProblemMatcherPlugin
+      polyfillGlobals.NodeGlobalsPolyfillPlugin({
+        process: true,
+        buffer: true
+      }),
+      polyfillModules.NodeModulesPolyfillPlugin(),
+      esbuildProblemMatcherPlugin /* add to the end of plugins array */
     ]
   });
   if (watch) {
@@ -29,6 +40,8 @@ async function main() {
 }
 
 /**
+ * This plugin hooks into the build process to print errors in a format that the problem matcher in
+ * Visual Studio Code can understand.
  * @type {import('esbuild').Plugin}
  */
 const esbuildProblemMatcherPlugin = {

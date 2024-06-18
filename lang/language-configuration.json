@@ -30,8 +30,8 @@
         ["<", ">"]
     ],
     "indentationRules": {
-        "increaseIndentPattern": "(?x) \\{ [^}\"']* $ | \\[ [^\\]\"']* $ | \\( [^)\"']* $",
-        "decreaseIndentPattern": "(?x) ^ \\s* (\\s* /[*] .* [*]/ \\s*)* [}\\])]"
+        "increaseIndentPattern": "(\\{[^}\"']*$) | (\\[[^\\]\"']*$) | (\\([^)\"']*$)",
+        "decreaseIndentPattern": "^\\s*(\\s*/[*].*[*]/\\s*)*[}\\])]"
     },
     "folding": {
         "markers": {

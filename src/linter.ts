@@ -60,7 +60,7 @@ export async function doLint(document: vscode.TextDocument) {
             const message = getErrorMessage(error);
             if (message.includes("include paths")) continue; // not currently supported by stancjs
             const diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error);
-            diagnostic.source = "stan-vscode";
+            diagnostic.source = "vscode-stan-extension";
             diagnostics.push(diagnostic);
         }
     }
@@ -71,7 +71,7 @@ export async function doLint(document: vscode.TextDocument) {
             if (range === undefined) continue;
             const message = getWarningMessage(warning);
             const diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Warning);
-            diagnostic.source = "stan-vscode";
+            diagnostic.source = "vscode-stan-extension";
             diagnostics.push(diagnostic);
         }
     }

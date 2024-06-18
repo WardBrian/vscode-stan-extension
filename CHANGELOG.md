@@ -1,5 +1,9 @@
 # Change Log
 
+# 0.6.0
+
+- Support usage as a web extension
+
 # 0.5.1
 
 - Made the linter run on document change, not just on save
