@@ -28,13 +28,13 @@ function rangeFromMessage(message: string): vscode.Range | undefined {
     return new vscode.Range(startLine, startColumn, endLine, endColumn);
 }
 
-const getWarningMessage = (message: string) => {
+function getWarningMessage(message: string) {
     message = message.replace(/Warning.*column \d+: /, "");
     message = message.replace(/\s+/gs, " ");
     return message.trim();
 }
 
-const getErrorMessage = (message: string) => {
+function getErrorMessage(message: string) {
     // cut off code snippet for display
     if (message.includes("------\n")) {
         message = message.split("------\n")[2];
@@ -85,6 +85,7 @@ function registerLinter(context: vscode.ExtensionContext) {
         stanDiagnostics.delete(textDocument.uri);
     }, null, context.subscriptions);
     vscode.workspace.onDidSaveTextDocument(doLint, null, context.subscriptions);
+    vscode.workspace.onDidChangeTextDocument((event) => doLint(event.document), null, context.subscriptions);
     vscode.workspace.textDocuments.forEach(doLint, null);
     logger.appendLine("Initialized Stan linter");
 }
