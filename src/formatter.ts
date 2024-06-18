@@ -12,10 +12,18 @@ async function alertFormattingError(
     const message = errors.join("\n");
     logger.appendLine(message);
 
-    if (message.includes("Syntax") || message.includes("Semantic")) {
+    const errorWindowMessage = "Stan formatting failed due to an error";
+
+    if (message.includes("include paths")) {
+        const _ = await vscode.window.showInformationMessage(
+            errorWindowMessage +
+            ": #include directives are not currently supported by stancjs."
+        );
+
+    } else if (message.includes("Syntax") || message.includes("Semantic")) {
         const outputButton = "Show Output";
         const response = await vscode.window.showErrorMessage(
-            "Stan formatting failed due to an error in your program",
+            errorWindowMessage +" in your program",
             outputButton
         );
         if (response === outputButton) {

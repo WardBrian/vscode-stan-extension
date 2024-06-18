@@ -28,7 +28,7 @@ The grammar was originally converted from the [atom-language-stan](https://githu
 ## Installation
 
 ```
-code --install-extension ivan-bocharov.stan-vscode
+code --install-extension wardbrian.stan-vscode
 ```
 
 or find and install it from the Extensions view.
