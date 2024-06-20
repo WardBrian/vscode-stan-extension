@@ -4,7 +4,7 @@ node_modules
 out/
 src/
 img/*.gif
-img/highlight-example.png
+img/*-example.png
 tsconfig.json
 webpack.config.js
 esbuild.js
