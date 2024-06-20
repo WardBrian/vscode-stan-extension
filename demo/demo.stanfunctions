@@ -1,5 +1,5 @@
-  void foo(data array[,] real x) {
-    print(x);
-
-    return;
-  }
+void foo(data array[,] real x) {
+  print(x);
+  real jacobian;
+  return;
+}
