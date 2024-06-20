@@ -1,42 +1,42 @@
 {
-    "comments": {
-        // symbol used for single line comment. Remove this entry if your language does not support line comments
-        "lineComment": "//",
-        // symbols used for start and end a block comment. Remove this entry if your language does not support block comments
-        "blockComment": [ "/*", "*/" ]
-    },
-    // symbols used as brackets
-    "brackets": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"]
-    ],
-    // symbols that are auto closed when typing
-    "autoClosingPairs": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"],
-        ["\"", "\""],
-        ["'", "'"],
-        ["<", ">"]
-    ],
-    // symbols that that can be used to surround a selection
-    "surroundingPairs": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"],
-        ["\"", "\""],
-        ["'", "'"],
-        ["<", ">"]
-    ],
-    "indentationRules": {
-        "increaseIndentPattern": "(\\{[^}\"']*$) | (\\[[^\\]\"']*$) | (\\([^)\"']*$)",
-        "decreaseIndentPattern": "^\\s*(\\s*/[*].*[*]/\\s*)*[}\\])]"
-    },
-    "folding": {
-        "markers": {
-          "start": "^[functions|data|transformed\\s+data|parameters|transformed\\s+parameters|model|generated\\s+quantities]\\s\\{$",
-          "end": "^\\}$"
-        }
-      }
+  "comments": {
+    // symbol used for single line comment. Remove this entry if your language does not support line comments
+    "lineComment": "//",
+    // symbols used for start and end a block comment. Remove this entry if your language does not support block comments
+    "blockComment": ["/*", "*/"]
+  },
+  // symbols used as brackets
+  "brackets": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"]
+  ],
+  // symbols that are auto closed when typing
+  "autoClosingPairs": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["\"", "\""],
+    ["'", "'"],
+    ["<", ">"]
+  ],
+  // symbols that that can be used to surround a selection
+  "surroundingPairs": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["\"", "\""],
+    ["'", "'"],
+    ["<", ">"]
+  ],
+  "indentationRules": {
+    "increaseIndentPattern": "(\\{[^}\"']*$) | (\\[[^\\]\"']*$) | (\\([^)\"']*$)",
+    "decreaseIndentPattern": "^\\s*(\\s*/[*].*[*]/\\s*)*[}\\])]"
+  },
+  "folding": {
+    "markers": {
+      "start": "^[functions|data|transformed\\s+data|parameters|transformed\\s+parameters|model|generated\\s+quantities]\\s\\{$",
+      "end": "^\\}$"
+    }
+  }
 }

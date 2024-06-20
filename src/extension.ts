@@ -1,4 +1,3 @@
-
 import * as vscode from "vscode";
 import registerLinter from "./linter";
 import registerFormatter from "./formatter";
@@ -8,9 +7,8 @@ import registerFormatter from "./formatter";
  * the `activationEvents` property in package.json.
  */
 export function activate(context: vscode.ExtensionContext): void {
-    registerFormatter(context);
-    registerLinter(context);
+  registerFormatter(context);
+  registerLinter(context);
 }
 
-export function deactivate(): void {
-}
+export function deactivate(): void {}

@@ -1,35 +1,35 @@
-const esbuild = require('esbuild');
-const polyfillGlobals = require('@esbuild-plugins/node-globals-polyfill');
-const polyfillModules = require('@esbuild-plugins/node-modules-polyfill');
+const esbuild = require("esbuild");
+const polyfillGlobals = require("@esbuild-plugins/node-globals-polyfill");
+const polyfillModules = require("@esbuild-plugins/node-modules-polyfill");
 
-const production = process.argv.includes('--production');
-const watch = process.argv.includes('--watch');
+const production = process.argv.includes("--production");
+const watch = process.argv.includes("--watch");
 
 async function main() {
   const ctx = await esbuild.context({
-    entryPoints: ['src/extension.ts'],
+    entryPoints: ["src/extension.ts"],
     bundle: true,
-    format: 'cjs',
+    format: "cjs",
     minify: production,
     sourcemap: !production,
     sourcesContent: false,
-    platform: 'browser',
-    outdir: 'dist',
-    external: ['vscode'],
-    logLevel: 'silent',
+    platform: "browser",
+    outdir: "dist",
+    external: ["vscode"],
+    logLevel: "silent",
     // Node.js global to browser globalThis
     define: {
-      global: 'globalThis'
+      global: "globalThis",
     },
 
     plugins: [
       polyfillGlobals.NodeGlobalsPolyfillPlugin({
         process: true,
-        buffer: true
+        buffer: true,
       }),
       polyfillModules.NodeModulesPolyfillPlugin(),
-      esbuildProblemMatcherPlugin /* add to the end of plugins array */
-    ]
+      esbuildProblemMatcherPlugin /* add to the end of plugins array */,
+    ],
   });
   if (watch) {
     await ctx.watch();
@@ -45,20 +45,22 @@ async function main() {
  * @type {import('esbuild').Plugin}
  */
 const esbuildProblemMatcherPlugin = {
-  name: 'esbuild-problem-matcher',
+  name: "esbuild-problem-matcher",
 
   setup(build) {
     build.onStart(() => {
-      console.log('[watch] build started');
+      console.log("[watch] build started");
     });
     build.onEnd(result => {
       result.errors.forEach(({ text, location }) => {
         console.error(`✘ [ERROR] ${text}`);
-        console.error(`    ${location.file}:${location.line}:${location.column}:`);
+        console.error(
+          `    ${location.file}:${location.line}:${location.column}:`,
+        );
       });
-      console.log('[watch] build finished');
+      console.log("[watch] build finished");
     });
-  }
+  },
 };
 
 main().catch(e => {
