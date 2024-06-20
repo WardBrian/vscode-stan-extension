@@ -1,0 +1,7 @@
+stanc.js
+dist/
+out/
+node_modules/
+.vscode/
+.vscode-test-web/
+*.md
