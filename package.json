@@ -12,7 +12,8 @@
   "categories": [
     "Programming Languages",
     "Snippets",
-    "Formatters"
+    "Formatters",
+    "Linters"
   ],
   "keywords": [
     "stan"
@@ -80,6 +81,10 @@
     "snippets": [
       {
         "language": "stan",
+        "path": "./lang/snippets/snippets.json"
+      },
+      {
+        "language": "stanfunctions",
         "path": "./lang/snippets/snippets.json"
       }
     ],

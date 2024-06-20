@@ -74,7 +74,9 @@ function hunksToEdits(hunks: Hunk[]): vscode.TextEdit[] {
 function doFormat(document: vscode.TextDocument): vscode.TextEdit[] {
   const code = document.getText();
   const fileName = document.fileName;
-  const { errors, result } = callStan(fileName, code);
+  const args =
+    document.languageId === "stanfunctions" ? ["functions-only"] : [];
+  const { errors, result } = callStan(fileName, code, args);
 
   if (errors) {
     alertFormattingError(errors);
@@ -87,9 +89,12 @@ function doFormat(document: vscode.TextDocument): vscode.TextEdit[] {
 
 function registerFormatter(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.languages.registerDocumentFormattingEditProvider("stan", {
-      provideDocumentFormattingEdits: doFormat,
-    }),
+    vscode.languages.registerDocumentFormattingEditProvider(
+      ["stan", "stanfunctions"],
+      {
+        provideDocumentFormattingEdits: doFormat,
+      },
+    ),
   );
   logger.appendLine("Initialized Stan formatting");
 }

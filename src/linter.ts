@@ -46,11 +46,18 @@ function getErrorMessage(message: string) {
 const stanDiagnostics = vscode.languages.createDiagnosticCollection("stan");
 
 export async function doLint(document: vscode.TextDocument) {
-  if (document.languageId !== "stan") return;
+  let standaloneArg: string[];
+  if (document.languageId === "stan") {
+    standaloneArg = [];
+  } else if (document.languageId === "stanfunctions") {
+    standaloneArg = ["functions-only"];
+  } else {
+    return;
+  }
 
   const code = document.getText();
   const fileName = document.fileName;
-  const { errors, warnings } = callStan(fileName, code);
+  const { errors, warnings } = callStan(fileName, code, standaloneArg);
 
   let diagnostics: vscode.Diagnostic[] = [];
 

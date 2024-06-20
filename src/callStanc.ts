@@ -16,22 +16,27 @@ const stanc: StancFunction = stancjs.stanc;
 
 logger.appendLine("Loaded stanc.js");
 
-function callStan(filename: string, code: string): StancReturn {
+function callStan(
+  filename: string,
+  code: string,
+  args: string[] = [],
+): StancReturn {
   const lineLength =
     vscode.workspace
       .getConfiguration("vscode-stan-extension.format")
       .get<number>("lineLength") ?? 78;
-  const args = [
+  const stanc_args = [
     "auto-format",
     `filename-in-msg=${filename}`,
     `max-line-length=${lineLength}`,
     "canonicalze=deprecations",
     "allow-undefined",
+    ...args,
   ];
   logger.appendLine(
-    `Running stanc on ${filename} with args: ${args.join(", ")}`,
+    `Running stanc on ${filename} with args: ${stanc_args.join(", ")}`,
   );
-  return stanc(filename, code, args);
+  return stanc(filename, code, stanc_args);
 }
 
 export default callStan;
