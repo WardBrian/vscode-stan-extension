@@ -1,5 +1,10 @@
 # Change Log
 
+# 0.7.0
+
+- Add highlighting for \`\`\`stan blocks in markdown files
+- Separate out stanfunctions language for better highlighting and linting
+
 # 0.6.0
 
 - Support usage as a web extension

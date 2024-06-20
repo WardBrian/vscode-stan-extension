@@ -1,17 +1,8 @@
 {
   "name": "Stan",
   "scopeName": "source.stan",
-  "fileTypes": ["stan", "stanfunctions"],
+  "fileTypes": ["stan"],
   "patterns": [
-    {
-      "include": "#comments"
-    },
-    {
-      "include": "#strings"
-    },
-    {
-      "include": "#numbers"
-    },
     {
       "comment": "block declarations",
       "match": "\\b(functions|data|transformed\\s+data|parameters|transformed\\s+parameters|model|generated\\s+quantities)\\b\\s*\\{",
@@ -21,113 +12,16 @@
         }
       }
     },
-    {
-      "comment": "variable types",
-      "match": "\\b(int|real|data|complex|array|tuple|vector|simplex|unit_vector|ordered|positive_ordered|row_vector|matrix|complex_vector|complex_matrix|complex_row_vector|corr_matrix|cov_matrix|cholesky_factor_cov|cholesky_factor_corr|void)\\b",
-      "name": "storage.type.stan"
-    },
-    {
-      "match": "\\b(for|in|while|if|else)\\b",
-      "name": "keyword.control.stan"
-    },
-    {
-      "match": "\\b(lower|upper|offset|multiplier)\\s*(=)",
-      "captures": {
-        "1": {
-          "name": "keyword.other.transform.stan"
-        },
-        "2": {
-          "name": "punctuation.operator.equal.stan"
-        }
-      }
-    },
-    {
-      "match": "\\breturn\\b",
-      "name": "keyword.other.return.stan"
-    },
-    {
-      "match": "\\b(target)\\s*([+][=])",
-      "captures": {
-        "1": {
-          "name": "keyword.other.target.stan"
-        },
-        "2": {
-          "name": "keyword.operator.accumulator.stan"
-        }
-      }
-    },
-    {
-      "comment": "truncation operator T[]",
-      "match": "\\bT(?=\\s*\\[)",
-      "name": "keyword.other.truncation.stan"
-    },
-    {
-      "include": "#distributions"
-    },
-    {
-      "match": "\\b(print|reject)\\b",
-      "name": "keyword.other.special-functions.stan"
-    },
-    {
-      "include": "#functions"
-    },
-    {
-      "include": "#reserved"
-    },
-    {
-      "match": "\\b([a-zA-Z0-9_]*__|[0-9_][A-Za-z0-9_]+|_)\\b",
-      "name": "invalid.illegal.variable"
-    },
-    {
-      "match": "\\b[A-Za-z][0-9A-Za-z_]*\\b",
-      "comment": "generic variable names"
-    },
-    {
-      "include": "#operators"
-    },
-    {
-      "match": ",",
-      "name": "meta.delimiter.comma.stan"
-    },
-    {
-      "begin": "{",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.section.block.begin.stan"
-        }
-      },
-      "end": "}",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.section.block.end.stan"
-        }
-      },
-      "patterns": [
-        {
-          "include": "$base"
-        }
-      ]
-    },
-    {
-      "match": "[{}]",
-      "name": "meta.brace.curly.stan"
-    },
-    {
-      "match": "\\[|\\]",
-      "name": "meta.brace.square.stan"
-    },
-    {
-      "match": "\\(|\\)",
-      "name": "meta.brace.round.stan"
-    },
-    {
-      "match": "\\;",
-      "name": "punctuation.terminator.statement.stan"
-    },
-    {
-      "match": "[|]",
-      "name": "punctuation.sampling.bar.stan"
-    }
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#types" },
+    { "include": "#keywords" },
+    { "include": "#distributions" },
+    { "include": "#functions" },
+    { "include": "#variables" },
+    { "include": "#operators" },
+    { "include": "#punctuation" }
   ],
   "repository": {
     "docblock": {
@@ -315,6 +209,59 @@
         }
       ]
     },
+    "types": {
+      "patterns": [
+        {
+          "comment": "variable types",
+          "match": "\\b(int|real|data|complex|array|tuple|vector|simplex|unit_vector|ordered|positive_ordered|row_vector|matrix|complex_vector|complex_matrix|complex_row_vector|corr_matrix|cov_matrix|cholesky_factor_cov|cholesky_factor_corr|void)\\b",
+          "name": "storage.type.stan"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "\\b(for|in|while|if|else)\\b",
+          "name": "keyword.control.stan"
+        },
+        {
+          "match": "\\b(lower|upper|offset|multiplier)\\s*(=)",
+          "captures": {
+            "1": {
+              "name": "keyword.other.transform.stan"
+            },
+            "2": {
+              "name": "punctuation.operator.equal.stan"
+            }
+          }
+        },
+        {
+          "match": "\\breturn\\b",
+          "name": "keyword.other.return.stan"
+        },
+        {
+          "match": "\\b(target)\\s*([+][=])",
+          "captures": {
+            "1": {
+              "name": "keyword.other.target.stan"
+            },
+            "2": {
+              "name": "keyword.operator.accumulator.stan"
+            }
+          }
+        },
+        {
+          "match": "\\b(print|reject)\\b",
+          "name": "keyword.other.special-functions.stan"
+        },
+        {
+          "comment": "truncation operator T[]",
+          "match": "\\bT(?=\\s*\\[)",
+          "name": "keyword.other.truncation.stan"
+        }
+      ]
+    },
+
     "functions": {
       "patterns": [
         {
@@ -342,12 +289,68 @@
         }
       ]
     },
-    "reserved": {
+
+    "punctuation": {
+      "patterns": [
+        {
+          "match": ",",
+          "name": "meta.delimiter.comma.stan"
+        },
+        {
+          "begin": "{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.block.begin.stan"
+            }
+          },
+          "end": "}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.block.end.stan"
+            }
+          },
+          "patterns": [
+            {
+              "include": "$base"
+            }
+          ]
+        },
+        {
+          "match": "[{}]",
+          "name": "meta.brace.curly.stan"
+        },
+        {
+          "match": "\\[|\\]",
+          "name": "meta.brace.square.stan"
+        },
+        {
+          "match": "\\(|\\)",
+          "name": "meta.brace.round.stan"
+        },
+        {
+          "match": "\\;",
+          "name": "punctuation.terminator.statement.stan"
+        },
+        {
+          "match": "[|]",
+          "name": "punctuation.sampling.bar.stan"
+        }
+      ]
+    },
+    "variables": {
       "patterns": [
         {
           "match": "\\b(for|in|while|repeat|until|if|then|else|true|false|var|struct|typedef|export|auto|extern|var|static)\\b",
           "name": "invalid.illegal.reserved.stan",
           "comment": "Words reserved for internal Stan use"
+        },
+        {
+          "match": "\\b([a-zA-Z0-9_]*__|[0-9_][A-Za-z0-9_]+|_)\\b",
+          "name": "invalid.illegal.variable"
+        },
+        {
+          "match": "\\b[A-Za-z][0-9A-Za-z_]*\\b",
+          "comment": "generic variable names"
         }
       ]
     }

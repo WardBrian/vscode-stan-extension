@@ -2,7 +2,7 @@
   "name": "vscode-stan-extension",
   "displayName": "Stan",
   "description": "Stan language support for VS Code",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "publisher": "wardbrian",
   "repository": "https://github.com/wardbrian/vscode-stan-extension",
   "icon": "img/stan_logo.png",
@@ -31,7 +31,21 @@
           "stan"
         ],
         "extensions": [
-          ".stan",
+          ".stan"
+        ],
+        "icon": {
+          "light": "./lang/stan_logo.svg",
+          "dark": "./lang/stan_logo.svg"
+        },
+        "configuration": "./lang/language-configuration.json"
+      },
+      {
+        "id": "stanfunctions",
+        "aliases": [
+          "Stan Functions",
+          "stan-functions"
+        ],
+        "extensions": [
           ".stanfunctions"
         ],
         "icon": {
@@ -45,7 +59,22 @@
       {
         "language": "stan",
         "scopeName": "source.stan",
-        "path": "./lang/syntaxes/stan.tmLanguage.json"
+        "path": "./lang/syntaxes/stan.json"
+      },
+      {
+        "language": "stanfunctions",
+        "scopeName": "source.stanfunctions",
+        "path": "./lang/syntaxes/stanfunctions.json"
+      },
+      {
+        "scopeName": "markdown.stan.codeblock",
+        "path": "./lang/syntaxes/stan-markdown-code-block.json",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.stan": "stan"
+        }
       }
     ],
     "snippets": [

@@ -1,0 +1,17 @@
+{
+  "name": "Stan Functions",
+  "scopeName": "source.stanfunctions",
+  "fileTypes": ["stanfunctions"],
+  "patterns": [
+    { "include": "source.stan#comments" },
+    { "include": "source.stan#strings" },
+    { "include": "source.stan#numbers" },
+    { "include": "source.stan#types" },
+    { "include": "source.stan#keywords" },
+    { "include": "source.stan#distributions" },
+    { "include": "source.stan#functions" },
+    { "include": "source.stan#variables" },
+    { "include": "source.stan#operators" },
+    { "include": "source.stan#punctuation" }
+  ]
+}
