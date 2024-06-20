@@ -28,6 +28,8 @@ generated quantities {
   complex z = 3.4i;
   complex_vector[2] cvec = [z, z]';
   
+  real beta = beta(3, 4);
+  
   tuple(array[J] real, complex_vector[2]) t = (theta, cvec);
   vector[J] log_likelihood;
   vector[J] y_hat;

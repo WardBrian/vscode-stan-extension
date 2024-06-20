@@ -1,5 +1,10 @@
 # Change Log
 
+# 0.8.1
+
+- Improved appearance of hover-over documentation
+- Improved edge cases in syntax highlighting
+
 # 0.8.0
 
 - Add completion for built in functions and distributions

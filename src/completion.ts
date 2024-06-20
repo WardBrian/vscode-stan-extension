@@ -21,6 +21,12 @@ function setUpTries() {
     builtInFunctions.map(name, name);
   }
 
+  // not technically 'functions', but still useful to autocomplete
+  builtInFunctions.map("print", "print");
+  builtInFunctions.map("reject", "reject");
+  builtInFunctions.map("fatal_error", "fatal_error");
+  builtInFunctions.map("target", "target");
+
   const mathDistributions = getMathDistributions();
   const distLines = mathDistributions.split("\n");
   for (const line of distLines) {
