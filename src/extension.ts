@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import registerLinter from "./linter";
 import registerFormatter from "./formatter";
+import registerCompletions from "./completion";
 
 /**
  * Activate the extension. Run automatically by VSCode based on
@@ -9,6 +10,7 @@ import registerFormatter from "./formatter";
 export function activate(context: vscode.ExtensionContext): void {
   registerFormatter(context);
   registerLinter(context);
+  registerCompletions(context);
 }
 
 export function deactivate(): void {}

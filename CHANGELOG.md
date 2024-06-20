@@ -1,5 +1,9 @@
 # Change Log
 
+# 0.8.0
+
+- Add completion for built in functions and distributions
+
 # 0.7.0
 
 - Add highlighting for \`\`\`stan blocks in markdown files

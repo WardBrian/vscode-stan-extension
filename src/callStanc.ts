@@ -39,4 +39,12 @@ function callStan(
   return stanc(filename, code, stanc_args);
 }
 
+export function getMathSignatures(): string {
+  return stancjs.dump_stan_math_signatures();
+}
+
+export function getMathDistributions(): string {
+  return stancjs.dump_stan_math_distributions();
+}
+
 export default callStan;

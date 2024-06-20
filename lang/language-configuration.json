@@ -38,5 +38,6 @@
       "start": "^[functions|data|transformed\\s+data|parameters|transformed\\s+parameters|model|generated\\s+quantities]\\s\\{$",
       "end": "^\\}$"
     }
-  }
+  },
+  "wordPattern": "[a-zA-Z_][a-zA-Z0-9_]*"
 }

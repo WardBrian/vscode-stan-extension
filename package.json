@@ -2,7 +2,7 @@
   "name": "vscode-stan-extension",
   "displayName": "Stan",
   "description": "Stan language support for VS Code",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "publisher": "wardbrian",
   "repository": "https://github.com/wardbrian/vscode-stan-extension",
   "icon": "img/stan_logo.png",
@@ -120,7 +120,8 @@
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
-    "diff": "^4.0.1"
+    "diff": "^4.0.1",
+    "trie-search": "^2.0.0"
   },
   "devDependencies": {
     "@types/diff": "^5.2.1",
