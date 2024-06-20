@@ -3,6 +3,7 @@
 # 0.8.0
 
 - Add completion for built in functions and distributions
+- Add basic hover-over documentation for built in functions and distributions
 
 # 0.7.0
 
