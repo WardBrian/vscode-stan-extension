@@ -43,21 +43,18 @@
             },
             "2": {
               "name": "punctuation.definition.directive.stan"
-            },
-            "4": {
-              "name": "string.quoted.other.include.stan"
             }
           },
           "name": "meta.preprocessor.include.stan",
           "patterns": [
             {
-              "begin": "\"",
+              "begin": "[\"<]?",
               "beginCaptures": {
                 "0": {
                   "name": "punctuation.definition.string.begin.stan"
                 }
               },
-              "end": "\"",
+              "end": "[\">]?\\s",
               "endCaptures": {
                 "0": {
                   "name": "punctuation.definition.string.end.stan"

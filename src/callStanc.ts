@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 
 import { logger } from "./constants";
+import getIncludedFiles from "./includes";
 
 type StancReturn =
   | { errors: undefined; result: string; warnings?: string[] }
@@ -10,6 +11,7 @@ type StancFunction = (
   filename: string,
   code: string,
   options: string[],
+  includes?: Record<string, string>,
 ) => StancReturn;
 
 const stancjs = require("./stanc.js");
@@ -18,15 +20,19 @@ const stanc: StancFunction = stancjs.stanc;
 const stanc_version = stanc("", "", ["version"]).result;
 logger.appendLine(`Loaded stanc.js, version '${stanc_version}'`);
 
-function callStan(
-  filename: string,
-  code: string,
+async function callStan(
+  document: vscode.TextDocument,
   args: string[] = [],
-): StancReturn {
+): Promise<StancReturn> {
   const lineLength =
     vscode.workspace
       .getConfiguration("vscode-stan-extension.format")
       .get<number>("lineLength") ?? 78;
+
+  const filename = document.fileName;
+  const code = document.getText();
+  const includes = await getIncludedFiles(document);
+
   const stanc_args = [
     "auto-format",
     `filename-in-msg=${filename}`,
@@ -36,9 +42,9 @@ function callStan(
     ...args,
   ];
   logger.appendLine(
-    `Running stanc on ${filename} with args: ${stanc_args.join(", ")}`,
+    `Running stanc on ${filename} with args: ${stanc_args.join(", ")}, and includes: ${Object.keys(includes).join(", ")}`,
   );
-  return stanc(filename, code, stanc_args);
+  return stanc(filename, code, stanc_args, includes);
 }
 
 export function getMathSignatures(): string {

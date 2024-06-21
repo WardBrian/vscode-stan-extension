@@ -4,18 +4,24 @@ import { logger } from "./constants";
 
 function rangeFromMessage(message: string): vscode.Range | undefined {
   // format is "in 'filename', line (#)), column (#) to (line #,)? column (#)"
-  const start = message.match(/in '.*', line (\d+), column (\d+)( to)?/);
+
+  const start = message.matchAll(/'.*', line (\d+), column (\d+)( to)?/g);
   if (!start) {
     return undefined;
   }
+  // there will be multiple in the case of #included files
+  const lastMatch = Array.from(start).pop();
+  if (!lastMatch) {
+    return undefined;
+  }
 
-  const startLine = parseInt(start[1]) - 1;
-  const startColumn = parseInt(start[2]);
+  const startLine = parseInt(lastMatch[1]) - 1;
+  const startColumn = parseInt(lastMatch[2]);
 
   let endLine = startLine;
   let endColumn = startColumn;
 
-  if (start[4]) {
+  if (lastMatch[4]) {
     // " to" was matched
     const end = message.match(/to (line (\d+), )?column (\d+)/);
     if (end) {
@@ -30,17 +36,30 @@ function rangeFromMessage(message: string): vscode.Range | undefined {
 }
 
 function getWarningMessage(message: string) {
-  message = message.replace(/Warning.*column \d+: /, "");
-  message = message.replace(/\s+/gs, " ");
-  return message.trim();
+  let warning = message.replace(/Warning.*column \d+: /s, "");
+  warning = warning.replace(/\s+/gs, " ");
+  warning = warning.trim();
+  warning = message.includes("included from")
+    ? "Warning in included file:\n" + warning
+    : warning;
+  return warning;
 }
 
 function getErrorMessage(message: string) {
+  let error = message;
   // cut off code snippet for display
   if (message.includes("------\n")) {
-    message = message.split("------\n")[2];
+    error = error.split("------\n")[2];
   }
-  return message.trim();
+  error = error.trim();
+  error = message.includes("included from")
+    ? "Error in included file:\n" + error
+    : error;
+  error = error.includes("given information about")
+    ? error +
+      "\nConsider updating the includePaths setting of vscode-stan-extension"
+    : error;
+  return error;
 }
 
 const stanDiagnostics = vscode.languages.createDiagnosticCollection("stan");
@@ -55,9 +74,7 @@ export async function doLint(document: vscode.TextDocument) {
     return;
   }
 
-  const code = document.getText();
-  const fileName = document.fileName;
-  const { errors, warnings } = callStan(fileName, code, standaloneArg);
+  const { errors, warnings } = await callStan(document, standaloneArg);
 
   let diagnostics: vscode.Diagnostic[] = [];
 
@@ -66,7 +83,6 @@ export async function doLint(document: vscode.TextDocument) {
       const range = rangeFromMessage(error.toString());
       if (range === undefined) continue;
       const message = getErrorMessage(error);
-      if (message.includes("include paths")) continue; // not currently supported by stancjs
       const diagnostic = new vscode.Diagnostic(
         range,
         message,
@@ -99,19 +115,27 @@ export async function doLint(document: vscode.TextDocument) {
 
 function registerLinter(context: vscode.ExtensionContext) {
   context.subscriptions.push(stanDiagnostics);
-  vscode.workspace.onDidOpenTextDocument(doLint, null, context.subscriptions);
-  vscode.workspace.onDidCloseTextDocument(
-    textDocument => {
-      stanDiagnostics.delete(textDocument.uri);
-    },
-    null,
-    context.subscriptions,
+  context.subscriptions.push(
+    vscode.workspace.onDidOpenTextDocument(doLint, null, context.subscriptions),
   );
-  vscode.workspace.onDidSaveTextDocument(doLint, null, context.subscriptions);
-  vscode.workspace.onDidChangeTextDocument(
-    event => doLint(event.document),
-    null,
-    context.subscriptions,
+  context.subscriptions.push(
+    vscode.workspace.onDidCloseTextDocument(
+      textDocument => {
+        stanDiagnostics.delete(textDocument.uri);
+      },
+      null,
+      context.subscriptions,
+    ),
+  );
+  context.subscriptions.push(
+    vscode.workspace.onDidSaveTextDocument(doLint, null, context.subscriptions),
+  );
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeTextDocument(
+      event => doLint(event.document),
+      null,
+      context.subscriptions,
+    ),
   );
   vscode.workspace.textDocuments.forEach(doLint, null);
   logger.appendLine("Initialized Stan linter");

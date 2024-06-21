@@ -4,6 +4,8 @@ functions {
     
     return;
   }
+  
+  #include demo.stanfunctions
 }
 data {
   int<lower=0> J;
@@ -29,6 +31,8 @@ generated quantities {
   complex_vector[2] cvec = [z, z]';
   
   real beta = beta(3, 4);
+  
+  foo({{1, 2}, {3, 4}});
   
   tuple(array[J] real, complex_vector[2]) t = (theta, cvec);
   vector[J] log_likelihood;

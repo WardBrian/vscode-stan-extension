@@ -10,12 +10,7 @@ async function alertFormattingError(errors: string[]): Promise<void> {
 
   const errorWindowMessage = "Stan formatting failed due to an error";
 
-  if (message.includes("include paths")) {
-    const _ = await vscode.window.showInformationMessage(
-      errorWindowMessage +
-        ": #include directives are not currently supported by stancjs.",
-    );
-  } else if (message.includes("Syntax") || message.includes("Semantic")) {
+  if (message.includes("Syntax") || message.includes("Semantic")) {
     const outputButton = "Show Output";
     const response = await vscode.window.showErrorMessage(
       errorWindowMessage + " in your program",
@@ -71,18 +66,18 @@ function hunksToEdits(hunks: Hunk[]): vscode.TextEdit[] {
  * converted to edits and applied to the file. If the promise rejects, will
  * automatically show an error message to the user.
  */
-function doFormat(document: vscode.TextDocument): vscode.TextEdit[] {
-  const code = document.getText();
-  const fileName = document.fileName;
+async function doFormat(
+  document: vscode.TextDocument,
+): Promise<vscode.TextEdit[]> {
   const args =
     document.languageId === "stanfunctions" ? ["functions-only"] : [];
-  const { errors, result } = callStan(fileName, code, args);
+  const { errors, result } = await callStan(document, args);
 
   if (errors) {
     alertFormattingError(errors);
     throw new Error("Formatting failed: " + errors.join("\n"));
   }
-  const patch = createPatch(fileName, code, result);
+  const patch = createPatch(document.fileName, document.getText(), result);
   const parsed: ParsedDiff[] = parsePatch(patch);
   return hunksToEdits(parsed[0].hunks);
 }

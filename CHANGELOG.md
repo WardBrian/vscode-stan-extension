@@ -1,5 +1,9 @@
 # Change Log
 
+# 0.9.0
+
+- Experimental support for #include directives in Stan files.
+
 # 0.8.2
 
 - Improve completion suggestions by splitting function names at underscores

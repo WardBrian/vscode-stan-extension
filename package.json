@@ -2,7 +2,7 @@
   "name": "vscode-stan-extension",
   "displayName": "Stan",
   "description": "Stan language support for VS Code",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "publisher": "wardbrian",
   "repository": "https://github.com/wardbrian/vscode-stan-extension",
   "icon": "img/stan_logo.png",
@@ -89,13 +89,24 @@
       }
     ],
     "configuration": {
-      "type": "object",
-      "title": "Stan formatting",
+      "title": "Stan",
       "properties": {
         "vscode-stan-extension.format.lineLength": {
           "type": "number",
           "default": 78,
+          "scope": "machine-overridable",
           "markdownDescription": "Target line length"
+        },
+        "vscode-stan-extension.includePaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "${workspaceFolder}"
+          ],
+          "scope": "machine-overridable",
+          "markdownDescription": "Paths to search for #include-d files. Should be an absolute path or be based off of `${workspaceFolder}`. Always includes the directory of the open Stan file"
         }
       }
     }
