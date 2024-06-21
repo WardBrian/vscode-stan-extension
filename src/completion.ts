@@ -3,10 +3,9 @@ import TrieSearch from "trie-search";
 
 import logger from "./logger";
 import { getMathSignatures, getMathDistributions } from "./callStanc";
-import { getDocumentationForFunction } from "./documentation";
 
-const builtInFunctions: TrieSearch<string> = new TrieSearch();
-const builtInDistributions: TrieSearch<string> = new TrieSearch();
+const builtInFunctions: TrieSearch<string> = new TrieSearch(undefined, {splitOnRegEx: /[\s_]/g});
+const builtInDistributions: TrieSearch<string> = new TrieSearch(undefined, {splitOnRegEx: /[\s_]/g});
 
 function setUpTries() {
   const mathSignatures = getMathSignatures();

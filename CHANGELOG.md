@@ -1,5 +1,9 @@
 # Change Log
 
+# 0.8.2
+
+- Improve completion suggestions by splitting function names at underscores
+
 # 0.8.1
 
 - Improved appearance of hover-over documentation
