@@ -1,5 +1,5 @@
-void foo(data array[,] real x) {
+real bar(matrix x) {
   print(x);
-  real jacobian;
-  return;
+  real jacobian = sum(x);
+  return jacobian;
 }

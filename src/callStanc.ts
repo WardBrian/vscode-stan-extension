@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
-import logger from "./logger";
+
+import { logger } from "./constants";
 
 type StancReturn =
   | { errors: undefined; result: string; warnings?: string[] }

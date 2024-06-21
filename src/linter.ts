@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import callStan from "./callStanc";
-import logger from "./logger";
+import { logger } from "./constants";
 
 function rangeFromMessage(message: string): vscode.Range | undefined {
   // format is "in 'filename', line (#)), column (#) to (line #,)? column (#)"
@@ -80,7 +80,10 @@ export async function doLint(document: vscode.TextDocument) {
   if (warnings) {
     for (const warning of warnings) {
       const range = rangeFromMessage(warning);
-      if (range === undefined) continue;
+      if (range === undefined) {
+        logger.appendLine(`Warning message not parsed: ${warning}`);
+        continue;
+      }
       const message = getWarningMessage(warning);
       const diagnostic = new vscode.Diagnostic(
         range,

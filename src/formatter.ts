@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { Hunk, ParsedDiff, createPatch, parsePatch } from "diff";
 
-import logger from "./logger";
+import { logger, STAN_SELECTOR } from "./constants";
 import callStan from "./callStanc";
 
 async function alertFormattingError(errors: string[]): Promise<void> {
@@ -89,12 +89,9 @@ function doFormat(document: vscode.TextDocument): vscode.TextEdit[] {
 
 function registerFormatter(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.languages.registerDocumentFormattingEditProvider(
-      ["stan", "stanfunctions"],
-      {
-        provideDocumentFormattingEdits: doFormat,
-      },
-    ),
+    vscode.languages.registerDocumentFormattingEditProvider(STAN_SELECTOR, {
+      provideDocumentFormattingEdits: doFormat,
+    }),
   );
   logger.appendLine("Initialized Stan formatting");
 }

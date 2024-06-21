@@ -1,11 +1,15 @@
 import * as vscode from "vscode";
 import TrieSearch from "trie-search";
 
-import logger from "./logger";
+import { logger, STAN_SELECTOR } from "./constants";
 import { getMathSignatures, getMathDistributions } from "./callStanc";
 
-const builtInFunctions: TrieSearch<string> = new TrieSearch(undefined, {splitOnRegEx: /[\s_]/g});
-const builtInDistributions: TrieSearch<string> = new TrieSearch(undefined, {splitOnRegEx: /[\s_]/g});
+const builtInFunctions: TrieSearch<string> = new TrieSearch(undefined, {
+  splitOnRegEx: /[\s_]/g,
+});
+const builtInDistributions: TrieSearch<string> = new TrieSearch(undefined, {
+  splitOnRegEx: /[\s_]/g,
+});
 
 function setUpTries() {
   const mathSignatures = getMathSignatures();
@@ -92,7 +96,7 @@ function provideCompletionItems(
 function registerCompletions(context: vscode.ExtensionContext) {
   const { numFns, numDist } = setUpTries();
   context.subscriptions.push(
-    vscode.languages.registerCompletionItemProvider(["stan", "stanfunctions"], {
+    vscode.languages.registerCompletionItemProvider(STAN_SELECTOR, {
       provideCompletionItems,
     }),
   );

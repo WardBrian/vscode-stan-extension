@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-import logger from "./logger";
+import { logger, STAN_SELECTOR } from "./constants";
 import { getMathSignatures, getMathDistributions } from "./callStanc";
 import { getDocumentationForFunction } from "./documentation";
 
@@ -68,7 +68,7 @@ function provideHover(
 function registerHover(context: vscode.ExtensionContext) {
   setupSignatureMap();
   context.subscriptions.push(
-    vscode.languages.registerHoverProvider("stan", { provideHover }),
+    vscode.languages.registerHoverProvider(STAN_SELECTOR, { provideHover }),
   );
   logger.appendLine("Initialized Stan hover text");
 }
