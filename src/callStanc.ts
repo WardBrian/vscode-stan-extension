@@ -15,7 +15,8 @@ type StancFunction = (
 const stancjs = require("./stanc.js");
 const stanc: StancFunction = stancjs.stanc;
 
-logger.appendLine("Loaded stanc.js");
+const stanc_version = stanc("", "", ["version"]).result;
+logger.appendLine(`Loaded stanc.js, version '${stanc_version}'`);
 
 function callStan(
   filename: string,
