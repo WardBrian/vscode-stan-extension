@@ -1,10 +1,14 @@
-name: publish to marketplaces
+name: build & publish
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
-
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -29,6 +33,7 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -39,7 +44,7 @@ jobs:
       - name: generate changelog
         # get until third # heading
         run : |
-          cat CHANGELOG.md | awk '/^#/{a++} a<3 && a' >> release.txt
+          cat CHANGELOG.md | awk '/^#/{a++} a>1 && a<3 && a' >> release.txt
           cat release.txt
       - name: create release
         uses: softprops/action-gh-release@v2
