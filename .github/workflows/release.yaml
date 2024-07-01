@@ -1,0 +1,50 @@
+name: publish to marketplaces
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+      - name: install dependencies
+        run: npm install
+      - name: build
+        run: npm run package
+      - name: upload vsix
+        uses: actions/upload-artifact@v4
+        with:
+          path: *.vsix
+          name: vscode-stan-extension
+
+    publish:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: download vsix
+          uses: actions/download-artifact@v2
+          with:
+            name: vscode-stan-extension
+        - name: create release
+          uses: softprops/action-gh-release@v2
+          with:
+            files: "*.vsix"
+        - name setup Node
+          uses: actions/setup-node@v4
+          with:
+            cache: 'npm'
+        - name: install upload tools
+          run: npm install -g vsce ovsx
+        - name: publish to visual studio marketplace
+          run: vsce publish -p ${{ secrets.VSCODE_TOKEN }} --packagePath *.vsix
+        - name: publish to open-vsx
+          run: ovsx publish -p ${{ secrets.OVSX_TOKEN }} *.vsix
