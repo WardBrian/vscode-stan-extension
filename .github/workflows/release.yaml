@@ -26,29 +26,29 @@ jobs:
           path: "*.vsix"
           name: vscode-stan-extension
 
-    publish:
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-        - name: download vsix
-          uses: actions/download-artifact@v2
-          with:
-            name: vscode-stan-extension
-        - name: generate changelog
-          # get until third # heading
-          run: cat CHANGELOG.md | awk '/^#/{a++} a<3 && a' >> release.txt
-        - name: create release
-          uses: softprops/action-gh-release@v2
-          with:
-            files: "*.vsix"
-            body-path: release.txt
-        - name: setup Node
-          uses: actions/setup-node@v4
-          with:
-            cache: 'npm'
-        - name: install upload tools
-          run: npm install -g vsce ovsx
-        - name: publish to visual studio marketplace
-          run: vsce publish -p ${{ secrets.VSCODE_TOKEN }} --packagePath *.vsix
-        - name: publish to open-vsx
-          run: ovsx publish -p ${{ secrets.OVSX_TOKEN }} *.vsix
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: download vsix
+        uses: actions/download-artifact@v2
+        with:
+          name: vscode-stan-extension
+      - name: generate changelog
+        # get until third # heading
+        run: cat CHANGELOG.md | awk '/^#/{a++} a<3 && a' >> release.txt
+      - name: create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "*.vsix"
+          body-path: release.txt
+      - name: setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+      - name: install upload tools
+        run: npm install -g vsce ovsx
+      - name: publish to visual studio marketplace
+        run: vsce publish -p ${{ secrets.VSCODE_TOKEN }} --packagePath *.vsix
+      - name: publish to open-vsx
+        run: ovsx publish -p ${{ secrets.OVSX_TOKEN }} *.vsix
