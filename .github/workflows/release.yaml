@@ -38,7 +38,7 @@ jobs:
           uses: softprops/action-gh-release@v2
           with:
             files: "*.vsix"
-        - name setup Node
+        - name: setup Node
           uses: actions/setup-node@v4
           with:
             cache: 'npm'
