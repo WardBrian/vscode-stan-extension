@@ -23,7 +23,7 @@ jobs:
       - name: upload vsix
         uses: actions/upload-artifact@v4
         with:
-          path: *.vsix
+          path: "*.vsix"
           name: vscode-stan-extension
 
     publish:
