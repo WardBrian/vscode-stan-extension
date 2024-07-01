@@ -1,4 +1,7 @@
-# [vscode-stan-extension](https://marketplace.visualstudio.com/items?itemName=wardbrian.vscode-stan-extension)
+# vscode-stan-extension
+
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/wardbrian.vscode-stan-extension?label=Visual%20Studio%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=wardbrian.vscode-stan-extension)
+[![Open VSX Version](https://img.shields.io/open-vsx/v/wardbrian/vscode-stan-extension)](https://open-vsx.org/extension/wardbrian/vscode-stan-extension)
 
 This package adds syntax highlighting, code folding, formatting, linting, code suggestions,
 and snippets for [Stan](https://mc-stan.org) files in [Visual Studio Code](https://code.visualstudio.com/).

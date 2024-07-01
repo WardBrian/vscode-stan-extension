@@ -1,5 +1,9 @@
 # Change Log
 
+# 0.9.1
+
+- Fix highlighting of multi-line errors.
+
 # 0.9.0
 
 - Experimental support for #include directives in Stan files.

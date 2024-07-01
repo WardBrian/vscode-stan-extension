@@ -21,7 +21,7 @@ function rangeFromMessage(message: string): vscode.Range | undefined {
   let endLine = startLine;
   let endColumn = startColumn;
 
-  if (lastMatch[4]) {
+  if (lastMatch[3]) {
     // " to" was matched
     const end = message.match(/to (line (\d+), )?column (\d+)/);
     if (end) {
