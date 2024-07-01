@@ -34,10 +34,14 @@ jobs:
           uses: actions/download-artifact@v2
           with:
             name: vscode-stan-extension
+        - name: generate changelog
+          # get until third # heading
+          run: cat CHANGELOG.md | awk '/^#/{a++} a<3 && a' >> release.txt
         - name: create release
           uses: softprops/action-gh-release@v2
           with:
             files: "*.vsix"
+            body-path: release.txt
         - name: setup Node
           uses: actions/setup-node@v4
           with:
