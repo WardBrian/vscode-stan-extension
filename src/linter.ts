@@ -3,12 +3,9 @@ import callStan from "./callStanc";
 import { logger } from "./constants";
 
 function rangeFromMessage(message: string): vscode.Range | undefined {
-  // format is "in 'filename', line (#)), column (#) to (line #,)? column (#)"
-
+  if (!message) return undefined;
+  // format is "in 'filename', line (#), column (#) to (line #,)? column (#)"
   const start = message.matchAll(/'.*', line (\d+), column (\d+)( to)?/g);
-  if (!start) {
-    return undefined;
-  }
   // there will be multiple in the case of #included files
   const lastMatch = Array.from(start).pop();
   if (!lastMatch) {

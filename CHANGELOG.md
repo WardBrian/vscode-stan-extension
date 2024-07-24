@@ -1,5 +1,9 @@
 # Change Log
 
+# 0.9.2
+
+- Minor improvement to the linter's error detection.
+
 # 0.9.1
 
 - Fix highlighting of multi-line errors.
