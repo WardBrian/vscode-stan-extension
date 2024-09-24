@@ -3,6 +3,7 @@ import TrieSearch from "trie-search";
 
 import { logger, STAN_SELECTOR } from "./constants";
 import { getMathSignatures, getMathDistributions } from "./callStanc";
+import { getDocumentationForFunction } from "./documentation";
 
 const builtInFunctions: TrieSearch<string> = new TrieSearch(undefined, {
   splitOnRegEx: /[\s_]/g,
@@ -57,6 +58,7 @@ function makeCompletionFunction(name: string): vscode.CompletionItem {
     vscode.CompletionItemKind.Function,
   );
   completion.detail = "Stan built-in function";
+  completion.documentation = getDocumentationForFunction(name);
   completion.insertText = new vscode.SnippetString(`${name}($0)`);
 
   return completion;

@@ -5,7 +5,7 @@ on:
     branches:
       - main
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
     branches:
       - main
@@ -19,7 +19,7 @@ jobs:
       - name: setup Node
         uses: actions/setup-node@v4
         with:
-          cache: 'npm'
+          cache: "npm"
       - name: install dependencies
         run: npm install
       - name: build
@@ -43,7 +43,7 @@ jobs:
           name: vscode-stan-extension
       - name: generate changelog
         # get until third # heading
-        run : |
+        run: |
           cat CHANGELOG.md | awk '/^#/{a++} a>1 && a<3 && a' >> release.txt
           cat release.txt
       - name: create release
@@ -54,7 +54,7 @@ jobs:
       - name: setup Node
         uses: actions/setup-node@v4
         with:
-          cache: 'npm'
+          cache: "npm"
       - name: install upload tools
         run: npm install -g vsce ovsx
       - name: publish to visual studio marketplace

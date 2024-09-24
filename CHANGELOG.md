@@ -1,5 +1,9 @@
 # Change Log
 
+# 1.0.0
+
+- Added documentation link to completion dialog for built in functions and distributions
+
 # 0.9.2
 
 - Minor improvement to the linter's error detection.
