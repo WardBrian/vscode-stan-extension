@@ -4,6 +4,7 @@ import TrieSearch from "trie-search";
 import { logger, STAN_SELECTOR } from "./constants";
 import { getMathSignatures, getMathDistributions } from "./callStanc";
 import { getDocumentationForFunction } from "./documentation";
+import { getDistributionName } from "./hover";
 
 const builtInFunctions: TrieSearch<string> = new TrieSearch(undefined, {
   splitOnRegEx: /[\s_]/g,
@@ -47,6 +48,11 @@ function makeDistributionCompletion(name: string): vscode.CompletionItem {
     vscode.CompletionItemKind.Function,
   );
   completion.detail = "Stan built-in distribution";
+  const function_name = getDistributionName(name);
+  if (function_name) {
+    completion.documentation = getDocumentationForFunction(function_name);
+  }
+
   completion.insertText = new vscode.SnippetString(`${name}($0);`);
 
   return completion;

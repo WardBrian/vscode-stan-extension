@@ -41,7 +41,7 @@ function setupSignatureMap() {
   }
 }
 
-function getDistributionName(fnName: string) {
+export function getDistributionName(fnName: string) {
   return distributionToFunctionMap.get(fnName);
 }
 
