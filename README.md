@@ -33,6 +33,11 @@ and snippets for [Stan](https://mc-stan.org) files in [Visual Studio Code](https
 
 ![code-folding](./img/code-folding.gif)
 
+### More LSP-like features
+
+By additionally installing [Anycode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.anycode)
+you can get some language-server features like go-to-definition and find-references when
+using this extension.
 
 ## Installation
 

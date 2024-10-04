@@ -5,3 +5,4 @@ node_modules/
 out/
 .vscode-test-web/
 dist/
+tree-sitter-stan.wasm

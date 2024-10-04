@@ -1,5 +1,11 @@
 # Change Log
 
+# 2.0.0
+
+- Added support for [Anycode](https://github.com/microsoft/vscode-anycode) to
+  get some language-server features like go-to-definition and find-references.
+  Parsing provided by https://github.com/WardBrian/tree-sitter-stan
+
 # 1.0.0
 
 - Added documentation link to completion dialog for built in functions and distributions
