@@ -2,6 +2,7 @@
 
 # 2.0.0
 
+- Updated to Stan 2.36.0
 - Added support for [Anycode](https://github.com/microsoft/vscode-anycode) to
   get some language-server features like go-to-definition and find-references.
   Parsing provided by https://github.com/WardBrian/tree-sitter-stan

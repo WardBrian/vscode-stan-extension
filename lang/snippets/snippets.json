@@ -111,5 +111,10 @@
     "prefix": "target",
     "body": ["target += ${1};"],
     "description": "Code snippet for 'target +=' statement"
+  },
+  "jacobian +=": {
+    "prefix": "jacobian",
+    "body": ["jacobian += ${1};"],
+    "description": "Code snippet for 'jacobian +=' statement"
   }
 }
