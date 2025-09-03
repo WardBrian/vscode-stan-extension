@@ -32,6 +32,8 @@ function setupSignatureMap() {
   );
   functionSignatureMap.set("target", getDocumentationForFunction("target"));
 
+  // todo reduce sum and friends?
+
   const mathDistributions = getMathDistributions();
   const distLines = mathDistributions.split("\n");
   for (const line of distLines) {
