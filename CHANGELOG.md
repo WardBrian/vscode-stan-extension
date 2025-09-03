@@ -1,5 +1,9 @@
 # Change Log
 
+# 2.1.0
+
+- Updated to Stan 2.37.0
+
 # 2.0.0
 
 - Updated to Stan 2.36.0
