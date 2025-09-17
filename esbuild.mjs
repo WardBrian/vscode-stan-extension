@@ -1,11 +1,14 @@
-const esbuild = require("esbuild");
+import * as esbuild from "esbuild";
+import { polyfillNode } from "esbuild-plugin-polyfill-node";
 
-const production = false; //process.argv.includes("--production");
+
+const production = process.argv.includes("--production");
 const watch = process.argv.includes("--watch");
+
 
 async function main() {
   const ctx = await esbuild.context({
-    entryPoints: ["src/extension.ts"],
+    entryPoints: ["src/extension.ts", "src/server.ts"],
     bundle: true,
     format: "cjs",
     minify: production,
@@ -15,20 +18,41 @@ async function main() {
     outdir: "dist",
     external: ["vscode"],
     logLevel: "silent",
-    // Node.js global to browser globalThis
-    define: {
-      global: "globalThis",
-    },
-
     plugins: [
       esbuildProblemMatcherPlugin /* add to the end of plugins array */,
     ],
   });
+
+  const webctx = await esbuild.context({
+    entryPoints: ["src/web/extension.ts", "src/web/server.ts"],
+    bundle: true,
+    format: 'cjs',
+    minify: production,
+    sourcemap: !production,
+    sourcesContent: false,
+    platform: 'browser',
+    outdir: 'dist/web',
+    external: ['vscode'],
+    logLevel: 'warning',
+    // Node.js global to browser globalThis
+    define: {
+      global: 'globalThis',
+    },
+    plugins: [
+      polyfillNode({
+        globals: true,
+        process: true,
+      }),
+      esbuildProblemMatcherPlugin /* add to the end of plugins array */
+    ]
+  });
   if (watch) {
-    await ctx.watch();
+    await Promise.race[ctx.watch(), webctx.watch()];
   } else {
     await ctx.rebuild();
     await ctx.dispose();
+    await webctx.rebuild();
+    await webctx.dispose();
   }
 }
 

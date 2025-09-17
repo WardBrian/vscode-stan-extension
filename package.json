@@ -20,6 +20,7 @@
   ],
   "activationEvents": [],
   "main": "./dist/extension",
+  "browser": "./dist/web/extension",
   "contributes": {
     "languages": [
       {
@@ -130,34 +131,34 @@
   },
   "scripts": {
     "postinstall": "npx tree-sitter build --wasm node_modules/@wardbrian/tree-sitter-stan",
-    "compile": "tsc --noEmit && node esbuild.js",
+    "compile": "tsc --noEmit && node esbuild.mjs",
     "watch": "npm-run-all --parallel watch:*",
-    "watch:esbuild": "node esbuild.js --watch",
+    "watch:esbuild": "node esbuild.mjs --watch",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "format": "prettier --write .",
     "vscode:prepublish": "npm run package",
-    "package": "rm -rf ./dist/ && tsc --noEmit && node esbuild.js --production",
+    "package": "rm -rf ./dist/ && tsc --noEmit && node esbuild.mjs --production",
     "lint": "eslint",
-    "build": "vsce package"
+    "build": "vsce package",
+    "run-in-browser": "vscode-test-web --browser=firefox --extensionDevelopmentPath=. ."
   },
   "dependencies": {
-    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
-    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
-    "stan-language-server": "^0.2.0-beta.1",
-    "vscode-languageclient": "^9.0.1"
+    "esbuild-plugin-polyfill-node": "^0.3.0",
+    "stan-language-server": "file:../stan-language-server/stan-language-server-0.3.0.tgz",
+    "vscode-languageclient": "^9.0.1",
+    "vscode-languageserver": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^22",
     "@types/vscode": "^1.100.0",
-    "@vscode/test-web": "^0.0.72",
+    "@vscode/test-web": "^0.0.73",
     "@vscode/vsce": "^3.6.0",
     "@wardbrian/tree-sitter-stan": "^0.2.3",
     "esbuild": "^0.25.9",
+    "eslint": "^9.13.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.2",
     "tree-sitter-cli": "^0.23.2",
-    "eslint": "^9.13.0",
-    "mocha": "^10.3.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.0"
   }

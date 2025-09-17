@@ -1,5 +1,5 @@
-import * as vscode from "vscode";
 import * as path from "path";
+import { ExtensionContext, workspace } from "vscode";
 
 import {
   LanguageClient,
@@ -8,13 +8,13 @@ import {
   TransportKind,
 } from "vscode-languageclient/node";
 
-const logger = vscode.window.createOutputChannel("Stan Extension");
+import { logger } from "./constants";
 
-let client: LanguageClient;
+let client: LanguageClient | undefined;
 
-export function activate(context: vscode.ExtensionContext): void {
+export function activate(context: ExtensionContext): void {
   logger.appendLine("Activating Stan extension");
-  let serverModule = context.asAbsolutePath(path.join("node_modules", "stan-language-server", "dist", "server", "cli.js"));
+  let serverModule = context.asAbsolutePath(path.join("dist", "server.js"));
 
   let serverOptions: ServerOptions = {
     module: serverModule,
@@ -22,8 +22,11 @@ export function activate(context: vscode.ExtensionContext): void {
   };
 
   let clientOptions: LanguageClientOptions = {
-    documentSelector: ["stan", "stanfunctions"],
+    documentSelector: [{ language: "stan" }, { language: "stanfunctions" }],
     outputChannel: logger,
+    synchronize: {
+      fileEvents: workspace.createFileSystemWatcher("**/*.stan(functions)?"),
+    },
   };
 
   client = new LanguageClient(
