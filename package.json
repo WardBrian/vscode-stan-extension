@@ -144,7 +144,7 @@
   },
   "dependencies": {
     "esbuild-plugin-polyfill-node": "^0.3.0",
-    "stan-language-server": "file:../stan-language-server/stan-language-server-0.3.0.tgz",
+    "stan-language-server": "file:stan-language-server-0.3.0.tgz",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1"
   },
