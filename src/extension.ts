@@ -8,7 +8,7 @@ import {
   TransportKind,
 } from "vscode-languageclient/node";
 
-import { logger } from "./constants";
+import { logger, STAN_SELECTOR } from "./constants";
 
 let client: LanguageClient | undefined;
 
@@ -22,7 +22,7 @@ export function activate(context: ExtensionContext): void {
   };
 
   let clientOptions: LanguageClientOptions = {
-    documentSelector: [{ language: "stan" }, { language: "stanfunctions" }],
+    documentSelector: STAN_SELECTOR,
     outputChannel: logger,
     synchronize: {
       fileEvents: workspace.createFileSystemWatcher("**/*.stan(functions)?"),
