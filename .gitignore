@@ -6,3 +6,4 @@ out/
 .vscode-test-web/
 dist/
 tree-sitter-stan.wasm
+tsconfig.tsbuildinfo

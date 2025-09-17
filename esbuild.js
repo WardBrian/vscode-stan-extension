@@ -1,8 +1,6 @@
 const esbuild = require("esbuild");
-const polyfillGlobals = require("@esbuild-plugins/node-globals-polyfill");
-const polyfillModules = require("@esbuild-plugins/node-modules-polyfill");
 
-const production = process.argv.includes("--production");
+const production = false; //process.argv.includes("--production");
 const watch = process.argv.includes("--watch");
 
 async function main() {
@@ -13,7 +11,7 @@ async function main() {
     minify: production,
     sourcemap: !production,
     sourcesContent: false,
-    platform: "browser",
+    platform: "node",
     outdir: "dist",
     external: ["vscode"],
     logLevel: "silent",
@@ -23,11 +21,6 @@ async function main() {
     },
 
     plugins: [
-      polyfillGlobals.NodeGlobalsPolyfillPlugin({
-        process: true,
-        buffer: true,
-      }),
-      polyfillModules.NodeModulesPolyfillPlugin(),
       esbuildProblemMatcherPlugin /* add to the end of plugins array */,
     ],
   });
