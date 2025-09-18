@@ -89,13 +89,13 @@
     "configuration": {
       "title": "Stan",
       "properties": {
-        "vscode-stan-extension.format.lineLength": {
+        "stan-language-server.maxLineLength": {
           "type": "number",
           "default": 78,
-          "scope": "machine-overridable",
-          "markdownDescription": "Target line length"
+          "scope": "resource",
+          "markdownDescription": "Target line length for formatting."
         },
-        "vscode-stan-extension.includePaths": {
+        "stan-language-server.includePaths": {
           "type": "array",
           "items": {
             "type": "string"
@@ -103,7 +103,7 @@
           "default": [
             "${workspaceFolder}"
           ],
-          "scope": "machine-overridable",
+          "scope": "resource",
           "markdownDescription": "Paths to search for #include-d files. Should be an absolute path or be based off of `${workspaceFolder}`. Always includes the directory of the open Stan file"
         }
       }
