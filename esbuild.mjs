@@ -3,7 +3,6 @@ import { polyfillNode } from "esbuild-plugin-polyfill-node";
 
 
 const production = process.argv.includes("--production");
-const watch = process.argv.includes("--watch");
 
 
 async function main() {
@@ -46,14 +45,9 @@ async function main() {
       esbuildProblemMatcherPlugin /* add to the end of plugins array */
     ]
   });
-  if (watch) {
-    await Promise.race[ctx.watch(), webctx.watch()];
-  } else {
-    await ctx.rebuild();
-    await ctx.dispose();
-    await webctx.rebuild();
-    await webctx.dispose();
-  }
+
+  await Promise.all([ctx.rebuild(), webctx.rebuild()]);
+  await Promise.all([ctx.dispose(), webctx.dispose()]);
 }
 
 /**

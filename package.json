@@ -132,9 +132,6 @@
   "scripts": {
     "postinstall": "npx tree-sitter build --wasm node_modules/@wardbrian/tree-sitter-stan",
     "compile": "tsc --noEmit && node esbuild.mjs",
-    "watch": "npm-run-all --parallel watch:*",
-    "watch:esbuild": "node esbuild.mjs --watch",
-    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "format": "prettier --write .",
     "vscode:prepublish": "npm run package",
     "package": "rm -rf ./dist/ && tsc --noEmit && node esbuild.mjs --production",
@@ -156,7 +153,6 @@
     "@wardbrian/tree-sitter-stan": "^0.2.3",
     "esbuild": "^0.25.9",
     "eslint": "^9.13.0",
-    "npm-run-all": "^4.1.5",
     "prettier": "^3.3.2",
     "tree-sitter-cli": "^0.23.2",
     "typescript": "^5.9.2",
