@@ -1,5 +1,9 @@
 # Change Log
 
+# 3.0.0
+
+- Updated to use the new [stan-language-server](https://github.com/tomatitito/stan-language-server)
+
 # 2.1.0
 
 - Updated to Stan 2.37.0

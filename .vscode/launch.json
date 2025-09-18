@@ -1,0 +1,35 @@
+// A launch configuration that compiles the extension and then opens it inside a new window
+{
+	"version": "2.0.0",
+	"configurations": [
+		{
+			"type": "extensionHost",
+			"request": "launch",
+			"name": "Launch Client",
+			"runtimeExecutable": "${execPath}",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceRoot}"
+			],
+			"outFiles": [
+				"${workspaceRoot}/dist/**/*.js",
+			],
+			"autoAttachChildProcesses": true,
+			"preLaunchTask": "npm: build"
+		},
+		{
+			"type": "pwa-extensionHost",
+			"debugWebWorkerHost": true,
+			"request": "launch",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"--extensionDevelopmentKind=web"
+			],
+			"name": "Launch Client (web)",
+			"outFiles": [
+				"${workspaceRoot}/dist/web/**/*.js",
+			],
+			"autoAttachChildProcesses": true,
+			"preLaunchTask": "npm: build"
+		}
+	]
+}
