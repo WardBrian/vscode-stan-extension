@@ -149,7 +149,7 @@
     "@types/node": "^22",
     "@types/vscode": "^1.100.0",
     "@vscode/test-web": "^0.0.73",
-    "@vscode/vsce": "^3.6.0",
+    "@vscode/vsce": "^3.6.1",
     "@wardbrian/tree-sitter-stan": "^0.2.3",
     "esbuild": "^0.25.9",
     "eslint": "^9.13.0",
