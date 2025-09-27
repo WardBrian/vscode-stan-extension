@@ -18,7 +18,7 @@ export function activate(context: ExtensionContext): void {
 
   let serverOptions: ServerOptions = {
     module: serverModule,
-    transport: TransportKind.stdio,
+    transport: TransportKind.ipc,
   };
 
   let clientOptions: LanguageClientOptions = {
