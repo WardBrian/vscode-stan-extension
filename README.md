@@ -7,6 +7,9 @@
 This package adds syntax highlighting, code folding, formatting, linting, code suggestions,
 and snippets for [Stan](https://mc-stan.org) files in [Visual Studio Code](https://code.visualstudio.com/).
 
+Use another editor? Check out the Stan Language Server which powers most of the features in this extension:
+https://github.com/tomatitito/stan-language-server
+
 ## Features
 
 ### Syntax highlighting
