@@ -1,42 +1,53 @@
-const esbuild = require("esbuild");
-const polyfillGlobals = require("@esbuild-plugins/node-globals-polyfill");
-const polyfillModules = require("@esbuild-plugins/node-modules-polyfill");
+import * as esbuild from "esbuild";
+import { polyfillNode } from "esbuild-plugin-polyfill-node";
+
 
 const production = process.argv.includes("--production");
-const watch = process.argv.includes("--watch");
+
 
 async function main() {
   const ctx = await esbuild.context({
-    entryPoints: ["src/extension.ts"],
+    entryPoints: ["src/extension.ts", "src/server.ts"],
     bundle: true,
     format: "cjs",
     minify: production,
     sourcemap: !production,
     sourcesContent: false,
-    platform: "browser",
+    platform: "node",
     outdir: "dist",
     external: ["vscode"],
     logLevel: "silent",
-    // Node.js global to browser globalThis
-    define: {
-      global: "globalThis",
-    },
-
     plugins: [
-      polyfillGlobals.NodeGlobalsPolyfillPlugin({
-        process: true,
-        buffer: true,
-      }),
-      polyfillModules.NodeModulesPolyfillPlugin(),
       esbuildProblemMatcherPlugin /* add to the end of plugins array */,
     ],
   });
-  if (watch) {
-    await ctx.watch();
-  } else {
-    await ctx.rebuild();
-    await ctx.dispose();
-  }
+
+  const webctx = await esbuild.context({
+    entryPoints: ["src/web/extension.ts", "src/web/server.ts"],
+    bundle: true,
+    format: 'cjs',
+    minify: production,
+    sourcemap: !production,
+    sourcesContent: false,
+    platform: 'browser',
+    outdir: 'dist/web',
+    external: ['vscode'],
+    logLevel: 'warning',
+    // Node.js global to browser globalThis
+    define: {
+      global: 'globalThis',
+    },
+    plugins: [
+      polyfillNode({
+        globals: true,
+        process: true,
+      }),
+      esbuildProblemMatcherPlugin /* add to the end of plugins array */
+    ]
+  });
+
+  await Promise.all([ctx.rebuild(), webctx.rebuild()]);
+  await Promise.all([ctx.dispose(), webctx.dispose()]);
 }
 
 /**

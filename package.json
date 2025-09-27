@@ -2,12 +2,12 @@
   "name": "vscode-stan-extension",
   "displayName": "Stan",
   "description": "Stan language support for VS Code",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "publisher": "wardbrian",
   "repository": "https://github.com/wardbrian/vscode-stan-extension",
   "icon": "img/stan_logo.png",
   "engines": {
-    "vscode": "^1.76.0"
+    "vscode": "^1.100.0"
   },
   "categories": [
     "Programming Languages",
@@ -18,11 +18,9 @@
   "keywords": [
     "stan"
   ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
-  "main": "./dist/extension.js",
-  "browser": "./dist/extension.js",
+  "activationEvents": [],
+  "main": "./dist/extension",
+  "browser": "./dist/web/extension",
   "contributes": {
     "languages": [
       {
@@ -91,13 +89,13 @@
     "configuration": {
       "title": "Stan",
       "properties": {
-        "vscode-stan-extension.format.lineLength": {
+        "stan-language-server.maxLineLength": {
           "type": "number",
           "default": 78,
-          "scope": "machine-overridable",
-          "markdownDescription": "Target line length"
+          "scope": "resource",
+          "markdownDescription": "Target line length for formatting."
         },
-        "vscode-stan-extension.includePaths": {
+        "stan-language-server.includePaths": {
           "type": "array",
           "items": {
             "type": "string"
@@ -105,7 +103,7 @@
           "default": [
             "${workspaceFolder}"
           ],
-          "scope": "machine-overridable",
+          "scope": "resource",
           "markdownDescription": "Paths to search for #include-d files. Should be an absolute path or be based off of `${workspaceFolder}`. Always includes the directory of the open Stan file"
         }
       }
@@ -133,34 +131,31 @@
   },
   "scripts": {
     "postinstall": "npx tree-sitter build --wasm node_modules/@wardbrian/tree-sitter-stan",
-    "compile": "npm run check-types && node esbuild.js",
+    "compile": "tsc --noEmit && node esbuild.mjs",
     "format": "prettier --write .",
-    "check-types": "tsc --noEmit",
-    "watch": "npm-run-all --parallel watch:*",
-    "watch:esbuild": "node esbuild.js --watch",
-    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "vscode:prepublish": "npm run package",
-    "package": "rm -rf ./dist/ && npm run check-types && node esbuild.js --production",
-    "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. .",
-    "build": "vsce package"
+    "package": "rm -rf ./dist/ && tsc --noEmit && node esbuild.mjs --production",
+    "lint": "eslint",
+    "build": "vsce package",
+    "run-in-browser": "vscode-test-web --browser=firefox --extensionDevelopmentPath=. ."
   },
   "dependencies": {
-    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
-    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
-    "diff": "^4.0.1",
-    "trie-search": "^2.0.0"
+    "esbuild-plugin-polyfill-node": "^0.3.0",
+    "stan-language-server": "^0.2.0",
+    "vscode-languageclient": "^9.0.1",
+    "vscode-languageserver": "^9.0.1"
   },
   "devDependencies": {
-    "@types/diff": "^5.2.1",
-    "@types/node": "^20.14.3",
-    "@types/vscode": "^1.76.0",
-    "@vscode/test-web": "^0.0.72",
-    "@vscode/vsce": "^3.6.0",
+    "@types/node": "^22",
+    "@types/vscode": "^1.100.0",
+    "@vscode/test-web": "^0.0.73",
+    "@vscode/vsce": "^3.6.1",
     "@wardbrian/tree-sitter-stan": "^0.2.3",
     "esbuild": "^0.25.9",
-    "npm-run-all": "^4.1.5",
+    "eslint": "^9.13.0",
     "prettier": "^3.3.2",
     "tree-sitter-cli": "^0.23.2",
-    "typescript": "^4.9.5"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.39.0"
   }
 }
