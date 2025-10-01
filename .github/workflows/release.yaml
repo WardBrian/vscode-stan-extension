@@ -17,7 +17,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v5
       - name: setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           cache: "npm"
       - name: install dependencies
@@ -52,7 +52,7 @@ jobs:
           files: "*.vsix"
           body_path: release.txt
       - name: setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           cache: "npm"
       - name: install upload tools
