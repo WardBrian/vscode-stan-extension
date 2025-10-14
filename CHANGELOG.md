@@ -1,5 +1,9 @@
 # Change Log
 
+# 3.0.1
+
+- Bumped bundled stan-language-server to 0.3.0
+
 # 3.0.0
 
 - Updated to use the new [stan-language-server](https://github.com/tomatitito/stan-language-server)
