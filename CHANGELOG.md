@@ -1,5 +1,9 @@
 # Change Log
 
+# 3.0.2
+
+- Bumped bundled stan-language-server to 0.3.1
+
 # 3.0.1
 
 - Bumped bundled stan-language-server to 0.3.0

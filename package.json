@@ -140,8 +140,7 @@
     "run-in-browser": "vscode-test-web --browser=firefox --extensionDevelopmentPath=. ."
   },
   "dependencies": {
-    "esbuild-plugin-polyfill-node": "^0.3.0",
-    "stan-language-server": "^0.3.0",
+    "stan-language-server": "^0.3.1",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1"
   },
@@ -152,6 +151,7 @@
     "@vscode/vsce": "^3.6.1",
     "@wardbrian/tree-sitter-stan": "^0.2.3",
     "esbuild": "^0.25.9",
+    "esbuild-plugin-polyfill-node": "^0.3.0",
     "eslint": "^9.13.0",
     "prettier": "^3.3.2",
     "tree-sitter-cli": "^0.23.2",
