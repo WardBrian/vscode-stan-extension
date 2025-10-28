@@ -10,6 +10,9 @@ and snippets for [Stan](https://mc-stan.org) files in [Visual Studio Code](https
 Use another editor? Check out the Stan Language Server which powers most of the features in this extension:
 https://github.com/tomatitito/stan-language-server
 
+You can try it out online on [vscode.dev](https://vscode.dev/github/WardBrian/vscode-stan-extension). A popup will show in
+the bottom right recommending you install the extension. Once you have, you can open the files in the `demo/` folder.
+
 ## Features
 
 ### Syntax highlighting
