@@ -38,7 +38,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v5
       - name: download vsix
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: vscode-stan-extension
       - name: generate changelog
