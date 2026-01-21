@@ -2,6 +2,7 @@
 .vscode-test-web
 .github
 node_modules/
+!node_modules/@wardbrian/tree-sitter-stan/tree-sitter-stan.wasm
 src/
 out/
 img/
@@ -12,4 +13,3 @@ esbuild.*js
 .gitignore
 .prettierignore
 *.tgz
-    

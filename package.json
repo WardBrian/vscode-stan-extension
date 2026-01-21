@@ -2,7 +2,7 @@
   "name": "vscode-stan-extension",
   "displayName": "Stan",
   "description": "Stan language support for VS Code",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "publisher": "wardbrian",
   "repository": "https://github.com/wardbrian/vscode-stan-extension",
   "icon": "img/stan_logo.png",
@@ -109,7 +109,7 @@
       }
     },
     "anycodeLanguages": {
-      "grammarPath": "./tree-sitter-stan.wasm",
+      "grammarPath": "./node_modules/@wardbrian/tree-sitter-stan/tree-sitter-stan.wasm",
       "languageId": "stan",
       "extensions": [
         "stan"
@@ -130,7 +130,6 @@
     "arrowParens": "avoid"
   },
   "scripts": {
-    "postinstall": "npx tree-sitter build --wasm node_modules/@wardbrian/tree-sitter-stan",
     "compile": "tsc --noEmit && node esbuild.mjs",
     "format": "prettier --write .",
     "vscode:prepublish": "npm run package",
@@ -140,7 +139,8 @@
     "run-in-browser": "vscode-test-web --browser=firefox --extensionDevelopmentPath=. ."
   },
   "dependencies": {
-    "stan-language-server": "^0.3.1",
+    "@wardbrian/tree-sitter-stan": "^0.2.6",
+    "stan-language-server": "0.3.2",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1"
   },
@@ -148,8 +148,7 @@
     "@types/node": "^22",
     "@types/vscode": "^1.100.0",
     "@vscode/test-web": "^0.0.73",
-    "@vscode/vsce": "^3.6.1",
-    "@wardbrian/tree-sitter-stan": "^0.2.3",
+    "@vscode/vsce": "^3.7.1",
     "esbuild": "^0.25.9",
     "esbuild-plugin-polyfill-node": "^0.3.0",
     "eslint": "^9.13.0",
