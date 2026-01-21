@@ -1,5 +1,5 @@
 real bar(matrix x) {
   print(x);
-  real jacobian = sum(x);
-  return jacobian;
+  real j = lkj_cov_lpdf(x | []', []', 0.5);
+  return j;
 }

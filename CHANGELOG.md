@@ -1,5 +1,11 @@
 # Change Log
 
+# 3.1.0
+
+- Updated to Stan 2.38.0
+- Bumped stan-language-server
+- Bumped tree-sitter-stan
+
 # 3.0.2
 
 - Bumped bundled stan-language-server to 0.3.1
