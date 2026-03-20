@@ -109,7 +109,7 @@
       }
     },
     "anycodeLanguages": {
-      "grammarPath": "./node_modules/@wardbrian/tree-sitter-stan/tree-sitter-stan.wasm",
+      "grammarPath": "./node_modules/@wardbrian/tree-sitter-stan/grammars/stan/tree-sitter-stan.wasm",
       "languageId": "stan",
       "extensions": [
         "stan"
@@ -139,8 +139,8 @@
     "run-in-browser": "vscode-test-web --browser=firefox --extensionDevelopmentPath=. ."
   },
   "dependencies": {
-    "@wardbrian/tree-sitter-stan": "^0.2.6",
-    "stan-language-server": "0.3.2",
+    "@wardbrian/tree-sitter-stan": "^0.3.1",
+    "stan-language-server": "0.4.5",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1"
   },

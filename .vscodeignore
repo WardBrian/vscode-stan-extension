@@ -2,7 +2,7 @@
 .vscode-test-web
 .github
 node_modules/
-!node_modules/@wardbrian/tree-sitter-stan/tree-sitter-stan.wasm
+!node_modules/@wardbrian/tree-sitter-stan/grammars/stan/tree-sitter-stan.wasm
 src/
 out/
 img/
