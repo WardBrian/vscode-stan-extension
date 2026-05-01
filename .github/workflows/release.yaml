@@ -47,7 +47,7 @@ jobs:
           cat CHANGELOG.md | awk '/^#/{a++} a>1 && a<3 && a' >> release.txt
           cat release.txt
       - name: create release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: "*.vsix"
           body_path: release.txt
