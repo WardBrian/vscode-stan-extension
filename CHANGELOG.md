@@ -3,6 +3,8 @@
 # 3.1.1
 
 - Bumped stan-language-server
+  - the `warnPedantic` option is now available
+  - Snippets are now provided by the server
 - Bumped tree-sitter-stan
 
 # 3.1.0

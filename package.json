@@ -76,16 +76,7 @@
         }
       }
     ],
-    "snippets": [
-      {
-        "language": "stan",
-        "path": "./lang/snippets/snippets.json"
-      },
-      {
-        "language": "stanfunctions",
-        "path": "./lang/snippets/snippets.json"
-      }
-    ],
+
     "configuration": {
       "title": "Stan",
       "properties": {
@@ -94,6 +85,12 @@
           "default": 78,
           "scope": "resource",
           "markdownDescription": "Target line length for formatting."
+        },
+        "stan-language-server.warnPedantic": {
+          "type": "boolean",
+          "default": false,
+          "scope": "resource",
+          "markdownDescription": "Whether to include additional warnings about your model (may include false positives)."
         },
         "stan-language-server.includePaths": {
           "type": "array",
@@ -140,7 +137,7 @@
   },
   "dependencies": {
     "@wardbrian/tree-sitter-stan": "^0.3.1",
-    "stan-language-server": "0.4.5",
+    "stan-language-server": "0.4.8",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1"
   },
