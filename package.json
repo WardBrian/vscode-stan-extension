@@ -2,7 +2,7 @@
   "name": "vscode-stan-extension",
   "displayName": "Stan",
   "description": "Stan language support for VS Code",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "publisher": "wardbrian",
   "repository": "https://github.com/wardbrian/vscode-stan-extension",
   "icon": "img/stan_logo.png",
@@ -76,7 +76,6 @@
         }
       }
     ],
-
     "configuration": {
       "title": "Stan",
       "properties": {
@@ -137,7 +136,7 @@
   },
   "dependencies": {
     "@wardbrian/tree-sitter-stan": "^0.3.1",
-    "stan-language-server": "0.4.8",
+    "stan-language-server": "0.4.9",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1"
   },
