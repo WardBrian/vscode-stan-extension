@@ -1,5 +1,8 @@
 # Change Log
 
+# 3.1.3
+- Bumped stan-language-server
+
 # 3.1.2
 - Bumped stan-language-server
 - Support for Stan 2.39

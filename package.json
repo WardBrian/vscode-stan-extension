@@ -132,19 +132,19 @@
     "package": "rm -rf ./dist/ && tsc --noEmit && node esbuild.mjs --production",
     "lint": "eslint",
     "build": "vsce package",
-    "run-in-browser": "vscode-test-web --browser=firefox --extensionDevelopmentPath=. ."
+    "run-in-browser": "vscode-test-web --browser=firefox --esm --extensionDevelopmentPath=dist ."
   },
   "dependencies": {
     "@wardbrian/tree-sitter-stan": "^0.3.1",
-    "stan-language-server": "0.4.9",
+    "stan-language-server": "0.4.10",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^22",
     "@types/vscode": "^1.100.0",
-    "@vscode/test-web": "^0.0.73",
-    "@vscode/vsce": "^3.7.1",
+    "@vscode/test-web": "^0.0.80",
+    "@vscode/vsce": "^3.9.2",
     "esbuild": "^0.25.9",
     "esbuild-plugin-polyfill-node": "^0.3.0",
     "eslint": "^9.13.0",
