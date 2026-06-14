@@ -145,7 +145,7 @@
     "@types/vscode": "^1.100.0",
     "@vscode/test-web": "^0.0.80",
     "@vscode/vsce": "^3.9.2",
-    "esbuild": "^0.25.9",
+    "esbuild": "^0.28.1",
     "esbuild-plugin-polyfill-node": "^0.3.0",
     "eslint": "^9.13.0",
     "prettier": "^3.3.2",
